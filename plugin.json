@@ -1,0 +1,10 @@
+{
+	"name": "PhotoSwipe",
+	"version": "1.0",
+	"description": "Replaces default Lightbox with Photoswipe (http://photoswipe.com)",
+	"author": {
+		"name": "Daniel Muller",
+		"link": "http://daniel.ctrlaltdel.ch"
+	}
+}
+
