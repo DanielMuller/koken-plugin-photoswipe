@@ -75,7 +75,7 @@ var initPhotoSwipeFromDOM = function() {
 			preload: [5,5],
 
 			getThumbBoundsFn: function(index) {
-				el=$("[data-pswp-gid='"+index+"']");
+				el=$("[data-pswp-gid='"+index+"']").children("img");
 				return {x:el.offset().left, y:el.offset().top, w:el.width()};
 			}
 		};
