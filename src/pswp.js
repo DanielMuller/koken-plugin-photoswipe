@@ -130,6 +130,13 @@ var initPhotoSwipeFromDOM = function() {
 
 		});
 
+// This needs to be improved. Having close animation and scroll at same time results in something weird and unnatural.
+//
+//		  gallery.listen('close', function() {
+//            index = gallery.getCurrentIndex();
+//            el=$("[data-pswp-gid='"+index+"']").children("img");
+//            $('html, body').animate({scrollTop:el.offset().top-$(window).height()/2+el.height()}, 500);
+//        });
 
 		// gettingData event fires each time PhotoSwipe retrieves image source & size
 		gallery.listen('gettingData', function(index, item) {
