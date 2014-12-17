@@ -16,7 +16,7 @@ var initPhotoSwipeFromDOM = function() {
 				w = parseInt(preset_info[1]);
 				h = parseInt(preset_info[2]);
 				src = base+name+retina+ext;
-				if (Math.max(w,h)>old_w && Math.max(w,h)>=800) {
+				if (Math.max(w,h)>old_w) {
 					old_w = Math.max(w,h);
 					item[name] = {
 						"src":src,
