@@ -4,7 +4,6 @@ var initPhotoSwipeFromDOM = function() {
 		var items = []
 		el.children("img").each(function(){
 			item = {};
-			old_w = 0;
 			base = $(this).attr('data-base');
 			ext = $(this).attr('data-extension');
 
@@ -16,14 +15,11 @@ var initPhotoSwipeFromDOM = function() {
 				w = parseInt(preset_info[1]);
 				h = parseInt(preset_info[2]);
 				src = base+name+retina+ext;
-				if (Math.max(w,h)>old_w) {
-					old_w = Math.max(w,h);
 					item[name] = {
 						"src":src,
 						"w": size_factor*w,
 						"h": size_factor*h
 					};
-				}
 			})
 			items.push(item);
 		});
