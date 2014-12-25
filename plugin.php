@@ -16,6 +16,16 @@ class MesphotosPhotoswipe extends KokenPlugin {
 		$valid_page = in_array(Koken::$location['template'],$valid_page_templates);
 
 		if ($valid_page) {
+
+			$sharing = [];
+			foreach ($this->data as $key => $val) {
+				$matches = null;
+				preg_match("/^share_(.+)$/",$key,$matches);
+				if ($matches[1] && $val == 1) {
+					$sharing[] = $matches[1];
+				}
+			}
+
 			$css = "photoswipe.css";
 			$skin_css = "default-skin/default-skin.css";
 			$js = "photoswipe.min.js";
@@ -30,7 +40,7 @@ class MesphotosPhotoswipe extends KokenPlugin {
 			$pswp[] = '<script src="'.$this->get_url($ui_js).'"></script>';
 			$pswp[] = '<script src="'.$this->get_url($pswp_js).'"></script>';
 			$pswp[] = '<style type="text/css">.pswp {text-align:left;}</style>';
-			$pswp[] = '<script language="javascript">$(function(){initPhotoSwipeFromDOM();});</script>';
+			$pswp[] = '<script language="javascript">$(function(){options = {"sharing":'.json_encode($sharing).'};initPhotoSwipeFromDOM(options);});</script>';
 
 			if (is_file($this->get_file_path().DIRECTORY_SEPARATOR.$this->custom_folder.DIRECTORY_SEPARATOR."pswp.html")) {
 				include $this->get_file_path().DIRECTORY_SEPARATOR.$this->custom_folder.DIRECTORY_SEPARATOR."pswp.html";

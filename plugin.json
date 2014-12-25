@@ -5,6 +5,43 @@
 	"author": {
 		"name": "Daniel Muller",
 		"link": "http://daniel.ctrlaltdel.ch"
+	},
+	"data": {
+		"share": {
+			"label":"Sharing",
+			"info":"Choose allowed sharing possibilites",
+			"type":"placeholder"
+		},
+		"share_facebook": {
+			"label":"Facebook",
+			"type":"boolean",
+			"value":true
+		},
+		"share_twitter": {
+			"label":"Twitter",
+			"type":"boolean",
+			"value":true
+		},
+		"share_pinterest": {
+			"label":"Pinterest",
+			"type":"boolean",
+			"value":true
+		},
+		"share_gplus": {
+			"label":"Google+",
+			"type":"boolean",
+			"value":true
+		},
+		"share_tumblr": {
+			"label":"Tumblr",
+			"type":"boolean",
+			"value":false
+		},
+		"share_download": {
+			"label":"Download",
+			"type":"boolean",
+			"value":false
+		}
 	}
 }
 

@@ -1,4 +1,4 @@
-var initPhotoSwipeFromDOM = function() {
+var initPhotoSwipeFromDOM = function(options) {
 
 	var parseThumbnailElements = function(el) {
 		var items = []
@@ -70,6 +70,19 @@ var initPhotoSwipeFromDOM = function() {
 
 		items = parseThumbnailElements(galleryElements);
 
+		availableShareButtons = {
+			facebook:{ id:'facebook', label:'Share on Facebook', url:'https://www.facebook.com/sharer/sharer.php?u={{url}}'},
+			twitter:{id:'twitter', label:'Tweet', url:'https://twitter.com/intent/tweet?text={{text}}&url={{url}}'},
+			pinterest:{id:'pinterest', label:'Pin it', url:'http://www.pinterest.com/pin/create/button/?url={{url}}&media={{image_url}}&description={{text}}'},
+			gplus:{id:'gplus', label:'Google+', url:'https://plus.google.com/share?url={{url}}'},
+			tumblr:{id:'tumblr', label:'Tumblr', url:'http://www.tumblr.com/share/photo?caption={{text}}&click_thru={{url}}&source={{image_url}}'},
+			download:{id:'download', label:'Download Image', url:'',download:true}
+		};
+		var shareButtons = Array();
+		$.each(koken_options.sharing, function(index,value) {
+			shareButtons.push(eval('availableShareButtons.'+value));
+		});
+
 		// define options (if needed)
 		options = {
 			index: parseInt(index),
@@ -78,7 +91,10 @@ var initPhotoSwipeFromDOM = function() {
 			getThumbBoundsFn: function(index) {
 				el=$("[data-pswp-gid='"+index+"']").children("img");
 				return {x:el.offset().left, y:el.offset().top, w:el.width()};
-			}
+			},
+
+			shareButtons: shareButtons,
+			shareEl: (shareButtons.length>0)
 		};
 
 		if(disableAnimation) {
@@ -166,8 +182,9 @@ var initPhotoSwipeFromDOM = function() {
 
 	var isHighDensity = function(){
 		return ((window.matchMedia && (window.matchMedia('only screen and (min-resolution: 144dpi), only screen and (min-resolution: 1.3dppx), only screen and (min-resolution: 48.8dpcm)').matches || window.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 1.3), only screen and (-o-min-device-pixel-ratio: 2.6/2), only screen and (min--moz-device-pixel-ratio: 1.3), only screen and (min-device-pixel-ratio: 1.3)').matches)) || (window.devicePixelRatio && window.devicePixelRatio > 1.3));
-	}
+	};
 
+	var koken_options = options;
 	// loop through all gallery elements and replace/bind events
 
 	var galleryElements = $("a.k-link-lightbox");
