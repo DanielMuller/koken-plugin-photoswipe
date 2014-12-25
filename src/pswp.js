@@ -6,7 +6,7 @@ var initPhotoSwipeFromDOM = function() {
 			item = {};
 			base = $(this).attr('data-base');
 			ext = $(this).attr('data-extension');
-			msrc = $(this).attr('src');
+			msrc = $(this).attr('data-src') || $(this).attr('src');
 
 			jQuery.each($(this).attr('data-presets').split(" "), function(i,val) {
 				preset_info = val.split(",");
