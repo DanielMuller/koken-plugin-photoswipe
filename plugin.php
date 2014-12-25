@@ -21,9 +21,11 @@ class MesphotosPhotoswipe extends KokenPlugin {
 			$js = "photoswipe.min.js";
 			$ui_js = "photoswipe-ui-default.min.js";
 			$pswp_js = "pswp.min.js";
+			$plugin_css = "default-skin/plugin.css";
 
 			$pswp[] = '<link rel="stylesheet" href="'.$this->get_url($css).'" />';
 			$pswp[] = '<link rel="stylesheet" href="'.$this->get_url($skin_css).'" />';
+			$pswp[] = '<link rel="stylesheet" href="'.$this->get_url($plugin_css).'" />';
 			$pswp[] = '<script src="'.$this->get_url($js).'"></script>';
 			$pswp[] = '<script src="'.$this->get_url($ui_js).'"></script>';
 			$pswp[] = '<script src="'.$this->get_url($pswp_js).'"></script>';
