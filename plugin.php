@@ -39,7 +39,6 @@ class MesphotosPhotoswipe extends KokenPlugin {
 			$pswp[] = '<script src="'.$this->get_url($js).'"></script>';
 			$pswp[] = '<script src="'.$this->get_url($ui_js).'"></script>';
 			$pswp[] = '<script src="'.$this->get_url($pswp_js).'"></script>';
-			$pswp[] = '<style type="text/css">.pswp {text-align:left;}</style>';
 			$pswp[] = '<script language="javascript">$(function(){options = {"sharing":'.json_encode($sharing).'};initPhotoSwipeFromDOM(options);});</script>';
 
 			if (is_file($this->get_file_path().DIRECTORY_SEPARATOR.$this->custom_folder.DIRECTORY_SEPARATOR."pswp.html")) {
