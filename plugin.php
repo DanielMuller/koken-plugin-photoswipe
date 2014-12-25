@@ -12,10 +12,8 @@ class MesphotosPhotoswipe extends KokenPlugin {
 
 	function foot($data)
 	{
-		$valid_page_classes = ["album", "contents", "favorites"];
-		$expr = strtolower(implode('|',$valid_page_classes));
-		$pattern = '/-('.$expr.').*\s.*-('.$expr.')/';
-		$valid_page = (preg_match($pattern,Koken::$page_class))==1 ? true : false;
+		$valid_page_templates = ["album", "contents", "favorites"];
+		$valid_page = in_array(Koken::$location['template'],$valid_page_templates);
 
 		if ($valid_page) {
 			$css = "photoswipe.css";
