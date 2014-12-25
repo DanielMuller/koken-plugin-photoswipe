@@ -6,7 +6,9 @@ var initPhotoSwipeFromDOM = function() {
 			item = {};
 			base = $(this).attr('data-base');
 			ext = $(this).attr('data-extension');
-			msrc = $(this).attr('data-src') || $(this).attr('src');
+			item['_common'] = {
+				"msrc": $(this).attr('data-src') || $(this).attr('src')
+			};
 
 			jQuery.each($(this).attr('data-presets').split(" "), function(i,val) {
 				preset_info = val.split(",");
@@ -19,7 +21,6 @@ var initPhotoSwipeFromDOM = function() {
 
 				item[name] = {
 					"src": src,
-					"msrc": msrc,
 					"w": size_factor*w,
 					"h": size_factor*h
 				};
@@ -143,7 +144,7 @@ var initPhotoSwipeFromDOM = function() {
 
 			// Set image source & size based on real viewport width
 			item.src = item[useImageSize].src;
-			item.msrc = item[useImageSize].msrc;
+			item.msrc = item['_common'].msrc;
 			item.w = item[useImageSize].w;
 			item.h = item[useImageSize].h;
 
