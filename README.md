@@ -23,7 +23,11 @@ Enable plugin in Settings/Plugins.
 
 Configuration
 -------------
-There is no plugin configuration. But it advised to clear *System Caches* after inabling it.
+You can choose which sharing services are available.
+
+You can define which DOM Elements will trigger Photoswipe. by leaving the option empty, the default element for the current Theme is used.
+
+It advised to clear *System Caches* after inabling it.
 
 Layout
 ------
