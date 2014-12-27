@@ -187,7 +187,7 @@ var initPhotoSwipeFromDOM = function(options) {
 	var koken_options = options;
 	// loop through all gallery elements and replace/bind events
 
-	var galleryElements = $("a.k-link-lightbox");
+	var galleryElements = $(koken_options.triggerEl);
 
 	i = 0;
 	galleryElements.each(function(){

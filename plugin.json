@@ -8,40 +8,49 @@
 	},
 	"data": {
 		"share": {
-			"label":"Sharing",
-			"info":"Choose allowed sharing possibilites",
-			"type":"placeholder"
+			"label": "Sharing",
+			"info": "Choose allowed sharing possibilites",
+			"type": "placeholder"
 		},
 		"share_facebook": {
-			"label":"Facebook",
-			"type":"boolean",
-			"value":true
+			"label": "Facebook",
+			"type": "boolean",
+			"value": true
 		},
 		"share_twitter": {
-			"label":"Twitter",
-			"type":"boolean",
-			"value":true
+			"label": "Twitter",
+			"type": "boolean",
+			"value": true
 		},
 		"share_pinterest": {
-			"label":"Pinterest",
-			"type":"boolean",
-			"value":true
+			"label": "Pinterest",
+			"type": "boolean",
+			"value": true
 		},
 		"share_gplus": {
-			"label":"Google+",
-			"type":"boolean",
-			"value":true
+			"label": "Google+",
+			"type": "boolean",
+			"value": true
 		},
 		"share_tumblr": {
-			"label":"Tumblr",
-			"type":"boolean",
-			"value":false
+			"label": "Tumblr",
+			"type": "boolean",
+			"value": false
 		},
 		"share_download": {
-			"label":"Download",
-			"type":"boolean",
-			"value":false
+			"label": "Download",
+			"type": "boolean",
+			"value": false
+		},
+		"trigger_el": {
+			"label": "Trigger Element",
+			"info": "jQuery Element that triggers Photoswipe. Needs to be the parent of the img tag. Leave empty to use the default based on current theme. Example for Axis: a.k-link-lightbox",
+			"type": "string"
+		},
+		"scroll_el": {
+			"label": "Scroll Trigger Element",
+			"info": "jQuery Element that triggers Koken's keyboard scroll. Leave empty to use the default based on current theme.",
+			"type": "string"
 		}
 	}
 }
-
