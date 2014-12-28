@@ -66,11 +66,16 @@ class MesphotosPhotoswipe extends KokenPlugin {
 
 		$triggerEls = Array(
 			'axis' => 'a.k-link-lightbox',
+			'axis2' => 'a.k-link-lightbox',
+			'boulevard' => 'div.content',
+			'chastain' => 'span.img-wrap a',
 			'elementary' => 'a.thumb',
 			'ensemble' => 'div.list-image a',
-			'repertoire' => 'div.img-wrap a',
-			'chastain' => 'span.img-wrap a',
-			'boulevard' => 'div.content'
+			'madison' => 'a.k-link-lightbox',
+			'madison2' => 'a.k-link-lightbox',
+			'regale' => 'a.k-link-lightbox',
+			'regale2' => 'a.k-link-lightbox',
+			'repertoire' => 'div.img-wrap a'
 		);
 		$myTheme = strtolower(Koken::$site['theme']['name']);
 		return $triggerEls[$myTheme];
