@@ -12,47 +12,42 @@ class MesphotosPhotoswipe extends KokenPlugin {
 
 	function foot($data)
 	{
-		$valid_page_templates = ["album", "contents", "favorites"];
-		$valid_page = in_array(Koken::$location['template'],$valid_page_templates);
 
-		if ($valid_page) {
-
-			$sharing = [];
-			foreach ($this->data as $key => $val) {
-				$matches = null;
-				preg_match("/^share_(.+)$/",$key,$matches);
-				if ($matches[1] && $val == 1) {
-					$sharing[] = $matches[1];
-				}
+		$sharing = [];
+		foreach ($this->data as $key => $val) {
+			$matches = null;
+			preg_match("/^share_(.+)$/",$key,$matches);
+			if ($matches[1] && $val == 1) {
+				$sharing[] = $matches[1];
 			}
-
-			$scrollEl = $this->get_scrollEl();
-			$css = "photoswipe.css";
-			$skin_css = "default-skin/default-skin.css";
-			$js = "photoswipe.min.js";
-			$ui_js = "photoswipe-ui-default.min.js";
-			$pswp_js = "pswp.min.js";
-			$plugin_css = "default-skin/plugin.css";
-
-			$pswp[] = '<link rel="stylesheet" href="'.$this->get_url($css).'" />';
-			$pswp[] = '<link rel="stylesheet" href="'.$this->get_url($skin_css).'" />';
-			$pswp[] = '<link rel="stylesheet" href="'.$this->get_url($plugin_css).'" />';
-			$pswp[] = '<script src="'.$this->get_url($js).'"></script>';
-			$pswp[] = '<script src="'.$this->get_url($ui_js).'"></script>';
-			$pswp[] = '<script src="'.$this->get_url($pswp_js).'"></script>';
-			$pswp[] = '<script language="javascript">$(function(){options = {"sharing":'.json_encode($sharing).',"triggerEl":"'.$this->get_triggerEl().'"};initPhotoSwipeFromDOM(options);});</script>';
-
-			if ($scrollEl) {
-				$pswp[] = '<script language="javascript">$(function(){$("'.$scrollEl[0].'").removeClass("'.$scrollEl[1].'");});</script>';
-			}
-
-			if (is_file($this->get_file_path().DIRECTORY_SEPARATOR.$this->custom_folder.DIRECTORY_SEPARATOR."pswp.html")) {
-				include $this->get_file_path().DIRECTORY_SEPARATOR.$this->custom_folder.DIRECTORY_SEPARATOR."pswp.html";
-			} else {
-				include $this->get_file_path().DIRECTORY_SEPARATOR.$this->pswp_folder.DIRECTORY_SEPARATOR."pswp.html";
-			}
-			print join("\n",$pswp);
 		}
+
+		$scrollEl = $this->get_scrollEl();
+		$css = "photoswipe.css";
+		$skin_css = "default-skin/default-skin.css";
+		$js = "photoswipe.min.js";
+		$ui_js = "photoswipe-ui-default.min.js";
+		$pswp_js = "pswp.min.js";
+		$plugin_css = "default-skin/plugin.css";
+
+		$pswp[] = '<link rel="stylesheet" href="'.$this->get_url($css).'" />';
+		$pswp[] = '<link rel="stylesheet" href="'.$this->get_url($skin_css).'" />';
+		$pswp[] = '<link rel="stylesheet" href="'.$this->get_url($plugin_css).'" />';
+		$pswp[] = '<script src="'.$this->get_url($js).'"></script>';
+		$pswp[] = '<script src="'.$this->get_url($ui_js).'"></script>';
+		$pswp[] = '<script src="'.$this->get_url($pswp_js).'"></script>';
+		$pswp[] = '<script language="javascript">$(function(){options = {"sharing":'.json_encode($sharing).',"triggerEl":"'.$this->get_triggerEl().'"};initPhotoSwipeFromDOM(options);});</script>';
+
+		if ($scrollEl) {
+			$pswp[] = '<script language="javascript">$(function(){$("'.$scrollEl[0].'").removeClass("'.$scrollEl[1].'");});</script>';
+		}
+
+		if (is_file($this->get_file_path().DIRECTORY_SEPARATOR.$this->custom_folder.DIRECTORY_SEPARATOR."pswp.html")) {
+			include $this->get_file_path().DIRECTORY_SEPARATOR.$this->custom_folder.DIRECTORY_SEPARATOR."pswp.html";
+		} else {
+			include $this->get_file_path().DIRECTORY_SEPARATOR.$this->pswp_folder.DIRECTORY_SEPARATOR."pswp.html";
+		}
+		print join("\n",$pswp);
 	}
 
 	function get_url($file) {
