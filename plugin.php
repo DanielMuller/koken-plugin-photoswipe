@@ -73,7 +73,7 @@ class MesphotosPhotoswipe extends KokenPlugin {
 			'ensemble' => 'div.list-image a',
 			'madison' => 'a.k-link-lightbox',
 			'madison2' => 'a.k-link-lightbox',
-			'regale' => 'a.k-link-lightbox',
+			'regale' => 'div#grid:not(.albums) a.img-hover',
 			'regale2' => 'a.k-link-lightbox',
 			'repertoire' => 'div.img-wrap a'
 		);
@@ -91,7 +91,9 @@ class MesphotosPhotoswipe extends KokenPlugin {
 		$scrollEls = Array(
 			'ensemble' => 'div.list-image',
 			'repertoire' => '.scroll-me',
-			'chastain' => '.content-list'
+			'chastain' => '.content-list',
+			'madison' => '.item',
+			'madison2' => '.item'
 		);
 		$myTheme = strtolower(Koken::$site['theme']['name']);
 
