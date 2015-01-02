@@ -94,7 +94,13 @@ var initPhotoSwipeFromDOM = function(options) {
 			},
 
 			shareButtons: shareButtons,
-			shareEl: (shareButtons.length>0)
+			shareEl: (shareButtons.length>0),
+			// prevent zooming to 200x on retina devices (eg retina macbook pro, ipads)
+			getDoubleTapZoom: function(){
+			if (window.devicePixelRatio > 1)
+			{return 0.5;}
+			else {return 1;}
+			}	
 		};
 
 		if(disableAnimation) {
