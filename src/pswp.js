@@ -196,6 +196,21 @@ var initPhotoSwipeFromDOM = function(options) {
 	var galleryElements = $(koken_options.triggerEl);
 
 	i = 0;
+
+	if (typeof $K == 'object') {
+		if (typeof $K.infinity == 'object') {
+			if (typeof $K.infinity.resume == "function") {
+				$K.infinity.resume = function(){return true;};
+			}
+		}
+		if (typeof $K.keyboard == 'object') {
+			if (typeof $K.keyboard.scroll == 'object') {
+				if (typeof $K.keyboard.scroll.move == "function") {
+					$K.keyboard.scroll.move = function(){return true;};
+				}
+			}
+		}
+	}
 	galleryElements.each(function(){
 		if ($(this).children("img").length>0) {
 			$(this).click(function(e){
