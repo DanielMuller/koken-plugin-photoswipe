@@ -13,7 +13,7 @@ class MesphotosPhotoswipe extends KokenPlugin {
 	function foot($data)
 	{
 
-		$sharing = [];
+		$sharing = Array();
 		foreach ($this->data as $key => $val) {
 			$matches = null;
 			preg_match("/^share_(.+)$/",$key,$matches);
@@ -30,6 +30,7 @@ class MesphotosPhotoswipe extends KokenPlugin {
 		$pswp_js = "pswp.min.js";
 		$plugin_css = "default-skin/plugin.css";
 
+		$pswp = Array();
 		$pswp[] = '<link rel="stylesheet" href="'.$this->get_url($css).'" />';
 		$pswp[] = '<link rel="stylesheet" href="'.$this->get_url($skin_css).'" />';
 		$pswp[] = '<link rel="stylesheet" href="'.$this->get_url($plugin_css).'" />';
