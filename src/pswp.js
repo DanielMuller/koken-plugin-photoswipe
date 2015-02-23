@@ -190,19 +190,25 @@ var initPhotoSwipeFromDOM = function(options) {
 		return ((window.matchMedia && (window.matchMedia('only screen and (min-resolution: 144dpi), only screen and (min-resolution: 1.3dppx), only screen and (min-resolution: 48.8dpcm)').matches || window.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 1.3), only screen and (-o-min-device-pixel-ratio: 2.6/2), only screen and (min--moz-device-pixel-ratio: 1.3), only screen and (min-device-pixel-ratio: 1.3)').matches)) || (window.devicePixelRatio && window.devicePixelRatio > 1.3));
 	};
 
+	var initPS = function(){
+		var i = 0;
+		galleryElements = $(koken_options.triggerEl);
+		galleryElements.each(function(){
+			if ($(this).children("img").length>0) {
+				$(this).click(function(e){
+					openPhotoSwipe(parseInt($(this).first().attr('data-pswp-gid')));
+					return false;
+				});
+				$(this).attr('data-pswp-gid',i);
+				i++;
+			}
+		});
+	}
 	var koken_options = options;
-	// loop through all gallery elements and replace/bind events
 
 	var galleryElements = $(koken_options.triggerEl);
 
-	i = 0;
-
 	if (typeof $K == 'object') {
-		if (typeof $K.infinity == 'object') {
-			if (typeof $K.infinity.resume == "function") {
-				$K.infinity.resume = function(){return true;};
-			}
-		}
 		if (typeof $K.keyboard == 'object') {
 			if (typeof $K.keyboard.scroll == 'object') {
 				if (typeof $K.keyboard.scroll.move == "function") {
@@ -211,17 +217,11 @@ var initPhotoSwipeFromDOM = function(options) {
 			}
 		}
 	}
-	galleryElements.each(function(){
-		if ($(this).children("img").length>0) {
-			$(this).click(function(e){
-				openPhotoSwipe(parseInt($(this).first().attr('data-pswp-gid')));
-				return false;
-			});
-			$(this).attr('data-pswp-gid',i);
-			i++;
-		}
+	$(window).on('k-infinite-loaded',function(){
+		initPS();
 	});
 
+	initPS();
 	// Parse URL and open gallery if it contains #&pid=3&gid=1
 	var hashData = photoswipeParseHash();
 	if(hashData.pid > 0) {
