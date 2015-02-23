@@ -183,6 +183,23 @@ var initPhotoSwipeFromDOM = function(options) {
 		});
 		*/
 
+		var scroll_move = null;
+		if (typeof $K == 'object') {
+			if (typeof $K.keyboard == 'object') {
+				if (typeof $K.keyboard.scroll == 'object') {
+					if (typeof $K.keyboard.scroll.move == "function") {
+						scroll_move = $K.keyboard.scroll.move;
+						$K.keyboard.scroll.move = function(){return true;};
+					}
+				}
+			}
+		}
+		gallery.listen('destroy',function(){
+			if (scroll_move) {
+				$K.keyboard.scroll.move = scroll_move;
+				scroll_move = null;
+			}
+		});
 		gallery.init();
 	};
 
@@ -208,15 +225,6 @@ var initPhotoSwipeFromDOM = function(options) {
 
 	var galleryElements = $(koken_options.triggerEl);
 
-	if (typeof $K == 'object') {
-		if (typeof $K.keyboard == 'object') {
-			if (typeof $K.keyboard.scroll == 'object') {
-				if (typeof $K.keyboard.scroll.move == "function") {
-					$K.keyboard.scroll.move = function(){return true;};
-				}
-			}
-		}
-	}
 	$(window).on('k-infinite-loaded',function(){
 		initPS();
 	});
