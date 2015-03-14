@@ -229,6 +229,12 @@ var initPhotoSwipeFromDOM = function(options) {
 		initPS();
 	});
 
+	if (koken_options.usingPillar) {
+		$(document).on('pjax:transition:start pjax:transition:restore', function() {
+			initPS();
+		});
+	}
+
 	initPS();
 	// Parse URL and open gallery if it contains #&pid=3&gid=1
 	var hashData = photoswipeParseHash();

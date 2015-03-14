@@ -37,7 +37,7 @@ class MesphotosPhotoswipe extends KokenPlugin {
 		$pswp[] = '<script src="'.$this->get_url($js).'"></script>';
 		$pswp[] = '<script src="'.$this->get_url($ui_js).'"></script>';
 		$pswp[] = '<script src="'.$this->get_url($pswp_js).'"></script>';
-		$pswp[] = '<script language="javascript">$(function(){options = {"sharing":'.json_encode($sharing).',"triggerEl":"'.$this->get_triggerEl().'"};initPhotoSwipeFromDOM(options);});</script>';
+		$pswp[] = '<script language="javascript">$(function(){options = {"sharing":'.json_encode($sharing).',"triggerEl":"'.$this->get_triggerEl().'","usingPillar":'.$this->usingPillar().'};initPhotoSwipeFromDOM(options);});</script>';
 
 		if ($scrollEl) {
 			$pswp[] = '<script language="javascript">$(function(){$("'.$scrollEl[0].'").removeClass("'.$scrollEl[1].'");});</script>';
@@ -104,5 +104,11 @@ class MesphotosPhotoswipe extends KokenPlugin {
 			$scrollEl = Array($element, $info['extension']);
 		}
 		return $scrollEl;
+	}
+
+	function usingPillar() {
+		$myTheme = strtolower(Koken::$site['theme']['name']);
+		$pillarThemes = Array('madison 2', 'regale 2', 'axis 2');
+		return (in_array($myTheme,$pillarThemes)) ? "true" : "false";
 	}
 }
