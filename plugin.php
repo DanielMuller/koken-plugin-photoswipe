@@ -6,6 +6,7 @@ class MesphotosPhotoswipe extends KokenPlugin {
 	{
 		$this->pswp_folder = "pswp";
 		$this->custom_folder = "custom";
+		$this->dev_folder = "src";
 
 		$this->register_hook('before_closing_body', 'foot');
 	}
@@ -52,6 +53,15 @@ class MesphotosPhotoswipe extends KokenPlugin {
 	}
 
 	function get_url($file) {
+		if (preg_match("/192\.168\..*/",$_SERVER['HTTP_HOST'])) {
+			$real_file = str_replace("min.","",$file);
+			if (is_file($this->get_file_path().DIRECTORY_SEPARATOR.$this->dev_folder.DIRECTORY_SEPARATOR.$real_file)) {
+				return Koken::$location['real_root_folder']."/storage/plugins/".$this->get_key()."/".$this->dev_folder."/".$real_file;
+			}
+			if (is_file($this->get_file_path().DIRECTORY_SEPARATOR.$this->dev_folder.DIRECTORY_SEPARATOR.$file)) {
+				return Koken::$location['real_root_folder']."/storage/plugins/".$this->get_key()."/".$this->dev_folder."/".$file;
+			}
+		}
 		if (is_file($this->get_file_path().DIRECTORY_SEPARATOR.$this->custom_folder.DIRECTORY_SEPARATOR.$file)) {
 			return Koken::$location['real_root_folder']."/storage/plugins/".$this->get_key()."/".$this->custom_folder."/".$file;
 		}
