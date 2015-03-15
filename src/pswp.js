@@ -162,6 +162,7 @@ var initPhotoSwipeFromDOM = function(options) {
 //        });
 
 		// gettingData event fires each time PhotoSwipe retrieves image source & size
+
 		gallery.listen('gettingData', function(index, item) {
 
 			// Set image source & size based on real viewport width
@@ -176,6 +177,7 @@ var initPhotoSwipeFromDOM = function(options) {
 			// Just avoid http requests in this listener, as it fires quite often
 
 		});
+
 		/*
 		gallery.listen('imageLoadComplete', function(index, item) {
 			console.log(index);
@@ -228,7 +230,9 @@ var initPhotoSwipeFromDOM = function(options) {
 	$(window).on('k-infinite-loaded',function(){
 		initPS();
 	});
-
+	$(window).on('orientationchange',function(){
+		initPS();
+	});
 	if (koken_options.usingPillar) {
 		$(document).on('pjax:transition:start pjax:transition:restore', function() {
 			initPS();
