@@ -70,13 +70,17 @@
   will-change: opacity; }
 
 .pswp__scroll-wrap {
+  will-change: auto !important;
+}
+  .pswp__scroll-wrap {
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   -webkit-backface-visibility: hidden;
-  will-change: transform; }
+  will-change: transform;
+}
 
 .pswp__container, .pswp__zoom-wrap {
   -ms-touch-action: none;
