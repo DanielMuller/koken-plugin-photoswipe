@@ -3,11 +3,12 @@ Koken Photoswipe Plugin
 
 Usage limitations
 -----------------
-- This plugin is originally developped for the Axis Theme. It should work fine on Axis2 too. On other Themes, the result can be totally unpredictable.
+- This plugin is originally developped for the Axis Theme (version 1). On other Themes, the result can be totally unpredictable.
 It makes only sense on pages with a thumnail-grid layout and with the ability to link the images to Lightbox (lens templates using `<koken:link lightbox="true" ><koken:img /></koken:link>`).
 - `<koken:img />` lens tags must not have a fixed preset. The plugin is expecting the *data-presets* attribute to get all avalaible sizes.
-- Support for other Themes as Axis was added in V1.2.
+- Support for Themes other than Axis was added in V1.2.
 - Since V1.3, the plugin now works on any page, as long as the DOM is structured as expected.
+- Major improvements since V1.5 to support Pillar based themes (V2 Themes).
 
 Demo
 ----
@@ -55,4 +56,4 @@ Credits
 -------
 All the heavy lifting is done using [Photoswipe](http://photoswipe.com) by [Code computerlove](http://www.codecomputerlove.com/) and [Dmitry Semenov](http://dimsemenov.com/).
 This plugin just integrates the relevant code into [Koken](http://koken.me/).
-The version used in this plugin is [e5daa...](https://github.com/dimsemenov/PhotoSwipe/tree/e5daa8ab462697f3cb211715b788d8e1de78d98f)
+The version used in this plugin is [2572d...](https://github.com/dimsemenov/PhotoSwipe/tree/2572dbd4987938e9e71c64eaffd634aaf658082f)
