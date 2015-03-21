@@ -68,6 +68,9 @@ var initPhotoSwipeFromDOM = function(options) {
 			options,
 			items;
 
+		if (pswp_open) {
+			return true;
+		}
 		items = parseThumbnailElements(galleryElements);
 
 		availableShareButtons = {
@@ -97,10 +100,12 @@ var initPhotoSwipeFromDOM = function(options) {
 			shareEl: (shareButtons.length>0),
 			// prevent zooming to 200x on retina devices (eg retina macbook pro, ipads)
 			getDoubleTapZoom: function(){
-			if (window.devicePixelRatio > 1)
-			{return 0.5;}
-			else {return 1;}
-			}	
+				if (window.devicePixelRatio > 1) {
+					return 0.5;
+				} else {
+					return 1;
+				}
+			}
 		};
 
 		if(disableAnimation) {
@@ -201,45 +206,100 @@ var initPhotoSwipeFromDOM = function(options) {
 				$K.keyboard.scroll.move = scroll_move;
 				scroll_move = null;
 			}
+			pswp_open = false;
+			$('.pswp')[0].className = "pswp";
+			if (pswp_open_orientation!=window.orientation) {
+				initPS();
+			}
 		});
 		gallery.init();
+		pswp_open = true;
+		pswp_open_orientation = window.orientation;
+
 	};
 
 	var isHighDensity = function(){
 		return ((window.matchMedia && (window.matchMedia('only screen and (min-resolution: 144dpi), only screen and (min-resolution: 1.3dppx), only screen and (min-resolution: 48.8dpcm)').matches || window.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 1.3), only screen and (-o-min-device-pixel-ratio: 2.6/2), only screen and (min--moz-device-pixel-ratio: 1.3), only screen and (min-device-pixel-ratio: 1.3)').matches)) || (window.devicePixelRatio && window.devicePixelRatio > 1.3));
 	};
 
-	var initPS = function(){
+	var initPS = function() {
+		if (koken_options.usingPillar) {
+			setTimeout(runInitPS,500);
+		} else {
+			runInitPS();
+		}
+	};
+	var runInitPS = function(){
+
+		if (!pswp_open) {
+			$('.pswp')[0].className = "pswp";
+			$("a[data-pswp-gid]").removeAttr("data-pswp-gid");
+		}
+
 		var i = 0;
-		galleryElements = $(koken_options.triggerEl);
-		galleryElements.each(function(){
-			if ($(this).children("img").length>0) {
-				$(this).click(function(e){
-					openPhotoSwipe(parseInt($(this).first().attr('data-pswp-gid')));
-					return false;
-				});
-				$(this).attr('data-pswp-gid',i);
-				i++;
+		if (koken_options.usingPillar) {
+			if (size_group == "size_0" && typeof(start_size_group)=="undefined") {
+				old_size_group = size_group;
+				start_size_group = $.grep($('div.pillar').attr('class').split(' '),function(v){return v!='pillar';})[0];
 			}
-		});
+			if (orientation_changed) {
+				if (size_group == "size_0") {
+					size_group = start_size_group;
+				}
+				old_size_group = size_group;
+				size_group = $.grep($('div.pillar:not(.'+old_size_group+')').attr('class').split(' '),function(v){return v!='pillar';})[0];
+				orientation_changed = false;
+			}
+			galleryElements = $('div.pillar:not(.'+old_size_group+') '+koken_options.triggerEl);
+		}
+		else {
+			galleryElements = $(koken_options.triggerEl);
+		}
+		if (!pswp_open) {
+			galleryElements.each(function(){
+				if ($(this).children("img").length>0) {
+					$(this).click(function(e){
+						openPhotoSwipe(parseInt($(this).first().attr('data-pswp-gid')));
+						return false;
+					});
+					$(this).attr('data-pswp-gid',i);
+					i++;
+				}
+			});
+		}
 	}
 	var koken_options = options;
+	var pswp_open = false;
+	var pswp_open_orientation;
+	var orientation_changed = false;
+	var orientation = window.orientation;
+	var size_group = "size_0", old_size_group, start_size_group;
 
 	var galleryElements = $(koken_options.triggerEl);
 
-	$(window).on('k-infinite-loaded',function(){
-		initPS();
-	});
-	$(window).on('orientationchange',function(){
-		initPS();
-	});
 	if (koken_options.usingPillar) {
-		$(document).on('pjax:transition:start pjax:transition:restore', function() {
+		$(document).on('pjax:end', function(){
 			initPS();
 		});
+		$(window).on('orientationchange', function(){
+			if (window.orientation != orientation) {
+				orientation_changed = true;
+				orientation = window.orientation;
+				initPS();
+			}
+			else {
+				orientation_changed = false;
+			}
+		});
+		$(window).on('k-infinite-loaded',function(){
+			initPS();
+		});
+		initPS();
+	}
+	else {
+		initPS();
 	}
 
-	initPS();
 	// Parse URL and open gallery if it contains #&pid=3&gid=1
 	var hashData = photoswipeParseHash();
 	if(hashData.pid > 0) {
