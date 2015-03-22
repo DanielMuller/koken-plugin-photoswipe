@@ -3,29 +3,31 @@ var initPhotoSwipeFromDOM = function(options) {
 	var parseThumbnailElements = function(el) {
 		var items = []
 		el.children("img").each(function(){
-			item = {};
-			base = $(this).attr('data-base');
-			ext = $(this).attr('data-extension');
-			item['_common'] = {
-				"msrc": $(this).attr('data-src') || $(this).attr('src')
-			};
-
-			jQuery.each($(this).attr('data-presets').split(" "), function(i,val) {
-				preset_info = val.split(",");
-				name = preset_info[0];
-				size_factor = isHighDensity() ? 2 : 1;
-				retina = isHighDensity() ? '.2x.' : '.';
-				w = parseInt(preset_info[1]);
-				h = parseInt(preset_info[2]);
-				src = base+name+retina+ext;
-
-				item[name] = {
-					"src": src,
-					"w": size_factor*w,
-					"h": size_factor*h
+			if (typeof($(this).attr('data-base')) != "undefined" && typeof($(this).attr('data-extension')) != "undefined" && typeof($(this).attr('data-presets')) != "undefined") {
+				item = {};
+				base = $(this).attr('data-base');
+				ext = $(this).attr('data-extension');
+				item['_common'] = {
+					"msrc": $(this).attr('data-src') || $(this).attr('src')
 				};
-			});
-			items.push(item);
+
+				jQuery.each($(this).attr('data-presets').split(" "), function(i,val) {
+					preset_info = val.split(",");
+					name = preset_info[0];
+					size_factor = isHighDensity() ? 2 : 1;
+					retina = isHighDensity() ? '.2x.' : '.';
+					w = parseInt(preset_info[1]);
+					h = parseInt(preset_info[2]);
+					src = base+name+retina+ext;
+
+					item[name] = {
+						"src": src,
+						"w": size_factor*w,
+						"h": size_factor*h
+					};
+				});
+				items.push(item);
+			}
 		});
 		return items;
 	};
@@ -92,7 +94,7 @@ var initPhotoSwipeFromDOM = function(options) {
 			preload: [5,5],
 
 			getThumbBoundsFn: function(index) {
-				el=$("[data-pswp-gid='"+index+"']").children("img");
+				el=$("[data-pswp-gid='"+index+"']").children("img[data-presets]");
 				return {x:el.offset().left, y:el.offset().top, w:el.width()};
 			},
 
@@ -240,14 +242,20 @@ var initPhotoSwipeFromDOM = function(options) {
 		if (koken_options.usingPillar) {
 			if (size_group == "size_0" && typeof(start_size_group)=="undefined") {
 				old_size_group = size_group;
-				start_size_group = $.grep($('div.pillar').attr('class').split(' '),function(v){return v!='pillar';})[0];
+				class_attr = $('div.pillar').attr('class');
+				if (class_attr) {
+					start_size_group = $.grep(class_attr.split(' '),function(v){return v!='pillar';})[0];
+				}
 			}
 			if (orientation_changed) {
 				if (size_group == "size_0") {
 					size_group = start_size_group;
 				}
 				old_size_group = size_group;
-				size_group = $.grep($('div.pillar:not(.'+old_size_group+')').attr('class').split(' '),function(v){return v!='pillar';})[0];
+				class_attr = $('div.pillar:not(.'+old_size_group+')').attr('class');
+				if (class_attr) {
+					size_group = $.grep(class_attr.split(' '),function(v){return v!='pillar';})[0];
+				}
 				orientation_changed = false;
 			}
 			galleryElements = $('div.pillar:not(.'+old_size_group+') '+koken_options.triggerEl);
