@@ -213,11 +213,15 @@ var initPhotoSwipeFromDOM = function(options) {
 			if (pswp_open_orientation!=window.orientation) {
 				initPS();
 			}
+			if (pswp_open_width!=$(window).width() || pswp_open_height!=$(window).height()) {
+				initPS();
+			}
 		});
 		gallery.init();
 		pswp_open = true;
 		pswp_open_orientation = window.orientation;
-
+		pswp_open_width = $(window).width();
+		pswp_open_height = $(window).height();
 	};
 
 	var isHighDensity = function(){
@@ -284,6 +288,15 @@ var initPhotoSwipeFromDOM = function(options) {
 	var size_group = "size_0", old_size_group, start_size_group;
 
 	var galleryElements = $(koken_options.triggerEl);
+
+	var last_resize = 0;
+
+	$(window).on('k-resize',function(){
+		if ((Date.now()-last_resize>1000)) {
+			last_resize = Date.now();
+			initPS();
+		}
+	});
 
 	if (koken_options.usingPillar) {
 		$(document).on('pjax:end', function(){
