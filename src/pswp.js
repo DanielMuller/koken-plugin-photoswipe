@@ -269,14 +269,16 @@ var initPhotoSwipeFromDOM = function(options) {
 		}
 		if (!pswp_open) {
 			galleryElements.each(function(){
-				if ($(this).children("img").length>0 && !$(this).parent().hasClass('type_video')) {
-					$(this).click(function(e){
-						openPhotoSwipe(parseInt($(this).first().attr('data-pswp-gid')));
-						return false;
-					});
-					$(this).attr('data-pswp-gid',i);
-					i++;
-				}
+		                if ($(this).children("img").length > 0) {
+		                    if (!$(this).parent().hasClass('type_video')) {
+		                        $(this).click(function(e) {
+		                            openPhotoSwipe(parseInt($(this).first().attr('data-pswp-gid')));
+		                            return false;
+		                        });
+		                    }
+		                    $(this).attr('data-pswp-gid', i);
+		                    i++;
+		                }
 			});
 		}
 	}
