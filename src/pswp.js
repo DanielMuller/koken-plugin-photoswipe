@@ -91,7 +91,7 @@ var initPhotoSwipeFromDOM = function(options) {
 		// define options (if needed)
 		options = {
 			index: parseInt(index),
-			preload: [5,5],
+			preload: [5,10],
 
 			getThumbBoundsFn: function(index) {
 				el=$("[data-pswp-gid='"+index+"']").children("img[data-presets]");
