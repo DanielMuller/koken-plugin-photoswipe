@@ -46,7 +46,12 @@ class MesphotosPhotoswipe extends KokenPlugin {
 		$pswp[] = '<script src="'.$this->get_url($js).'"></script>';
 		$pswp[] = '<script src="'.$this->get_url($ui_js).'"></script>';
 		$pswp[] = '<script src="'.$this->get_url($pswp_js).'"></script>';
-		$pswp[] = '<script language="javascript">$(function(){options = {"sharing":'.json_encode($sharing).',"triggerEl":"'.$this->get_triggerEl().'","usingPillar":'.$this->usingPillar().'};initPhotoSwipeFromDOM(options);});</script>';
+		$koken_options = Array(
+			'sharing' => $sharing,
+			'triggerEl' => $this->get_triggerEl(),
+			'usingPillar' => $this->usingPillar()
+		);
+		$pswp[] = '<script language="javascript">$(function(){initPhotoSwipeFromDOM('.json_encode($koken_options).')});</script>';
 
 		if ($scrollEl) {
 			$pswp[] = '<script language="javascript">$(function(){$("'.$scrollEl[0].'").removeClass("'.$scrollEl[1].'");});</script>';
