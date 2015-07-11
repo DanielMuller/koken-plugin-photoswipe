@@ -48,6 +48,15 @@ You can replace any of this files, by creating a file with same name inside the 
 - custom/photoswipe-ui-default.min.js
 - custom/pswp.min.js
 
+Uglifier
+--------
+Javascript compression can be done using uglify-js, a node.js library.
+An easy way to install it under Debian/Ubuntu:
+`apt-get install node-uglify`
+
+And uglify the file by running:
+`uglifyjs src/pswp.js > pswp/pswp.min.js`
+
 Todo
 ----
 - Ajax/PHP calls for image details
