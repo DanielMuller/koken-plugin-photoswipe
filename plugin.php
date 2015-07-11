@@ -9,6 +9,14 @@ class MesphotosPhotoswipe extends KokenPlugin {
 		$this->dev_folder = "src";
 
 		$this->register_hook('before_closing_body', 'foot');
+
+		$this->env = "production";
+		# Define ENVIRONMENT in app/site/site.php
+		if (defined('ENVIRONMENT')) {
+			if (ENVIRONMENT!="production") {
+				$this->env = "development";
+			}
+		}
 	}
 
 	function foot($data)
@@ -53,7 +61,7 @@ class MesphotosPhotoswipe extends KokenPlugin {
 	}
 
 	function get_url($file) {
-		if (preg_match("/192\.168\..*/",$_SERVER['HTTP_HOST'])) {
+		if ($this->env=="development") {
 			$real_file = str_replace("min.","",$file);
 			if (is_file($this->get_file_path().DIRECTORY_SEPARATOR.$this->dev_folder.DIRECTORY_SEPARATOR.$real_file)) {
 				return Koken::$location['real_root_folder']."/storage/plugins/".$this->get_key()."/".$this->dev_folder."/".$real_file;
