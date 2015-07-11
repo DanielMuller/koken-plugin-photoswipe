@@ -125,19 +125,20 @@ var initPhotoSwipeFromDOM = function(options) {
 		// beforeResize event fires each time size of gallery viewport updates
 		gallery.listen('beforeResize', function() {
 			// calculate real pixels when size changes
+			max_size = koken_options.max_size;
 			size_factor = isHighDensity() ? 2 : 1;
 			realViewportWidth = gallery.viewportSize.x * size_factor;
 
 			// Code below is needed if you want image to switch dynamically on window.resize
 
 			// Find out if current images need to be changed
-			if(useImageSize!='huge' && realViewportWidth >=1600 && 'huge' in items[0]) {
+			if(useImageSize!='huge' && realViewportWidth >=1600 && max_size >= 1600 && 'huge' in items[0]) {
 				useImageSize = 'huge';
 				imageSrcWillChange = true;
-			} else if(useImageSize!='xlarge' && realViewportWidth >= 1024 && 'xlarge' in items[0]) {
+			} else if(useImageSize!='xlarge' && realViewportWidth >= 1024 && max_size >= 1024 && 'xlarge' in items[0]) {
 				useImageSize = 'xlarge';
 				imageSrcWillChange = true;
-			} else if(useImageSize!='large' && realViewportWidth >= 800 && 'large' in items[0]) {
+			} else if(useImageSize!='large' && realViewportWidth >= 800 && max_size >= 800 && 'large' in items[0]) {
 				useImageSize = 'large';
 				imageSrcWillChange = true;
 			} else if(useImageSize!='medium_large') {

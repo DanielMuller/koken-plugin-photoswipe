@@ -51,6 +51,15 @@
 			"label": "Scroll Trigger Element",
 			"info": "jQuery Element that triggers Koken's keyboard scroll. Leave empty to use the default based on current theme.",
 			"type": "string"
+		},
+		"max_size": {
+			"label": "Max Image Size",
+			"type": "slider",
+			"min": 750,
+			"max": 2050,
+			"step": 50,
+			"value": 2048,
+			"suffix": "px"
 		}
 	}
 }
