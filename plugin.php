@@ -132,6 +132,6 @@ class MesphotosPhotoswipe extends KokenPlugin {
 	function usingPillar() {
 		$myTheme = strtolower(Koken::$site['theme']['name']);
 		$pillarThemes = Array('madison 2', 'regale 2', 'axis 2');
-		return (in_array($myTheme,$pillarThemes)) ? "true" : "false";
+		return (in_array($myTheme,$pillarThemes)) ? true : false;
 	}
 }
