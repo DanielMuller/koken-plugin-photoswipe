@@ -49,7 +49,8 @@ class MesphotosPhotoswipe extends KokenPlugin {
 		$koken_options = Array(
 			'sharing' => $sharing,
 			'triggerEl' => $this->get_triggerEl(),
-			'usingPillar' => $this->usingPillar()
+			'usingPillar' => $this->usingPillar(),
+			'hidpi' => Koken::$site['hidpi']
 		);
 		$pswp[] = '<script language="javascript">$(function(){initPhotoSwipeFromDOM('.json_encode($koken_options).')});</script>';
 
