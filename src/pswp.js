@@ -46,10 +46,10 @@ var initPhotoSwipeFromDOM = function(options) {
 			if(!vars[i]) {
 				continue;
 			}
-			var pair = vars[i].split('=');  
+			var pair = vars[i].split('=');
 			if(pair.length < 2) {
 				continue;
-			}           
+			}
 			params[pair[0]] = pair[1];
 		}
 
@@ -178,9 +178,9 @@ var initPhotoSwipeFromDOM = function(options) {
 			item.w = item[useImageSize].w;
 			item.h = item[useImageSize].h;
 
-			// It doesn't really matter what will you do here, 
+			// It doesn't really matter what will you do here,
 			// as long as item.src, item.w and item.h have valid values.
-			// 
+			//
 			// Just avoid http requests in this listener, as it fires quite often
 
 		});
