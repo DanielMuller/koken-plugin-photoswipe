@@ -149,35 +149,28 @@ var initPhotoSwipeFromDOM = function(options) {
 			// Code below is needed if you want image to switch dynamically on window.resize
 
 			// Find out if current images need to be changed
-			if(useImageSize!='huge' && realViewportWidth >=1600 && max_size >= 1600 && 'huge' in items[0]) {
-				useImageSize = 'huge';
-				imageSrcWillChange = true;
-			} else if(useImageSize!='xlarge' && realViewportWidth >= 1024 && max_size >= 1024 && 'xlarge' in items[0]) {
-				useImageSize = 'xlarge';
-				imageSrcWillChange = true;
-			} else if(useImageSize!='large' && realViewportWidth >= 800 && max_size >= 800 && 'large' in items[0]) {
-				useImageSize = 'large';
-				imageSrcWillChange = true;
-			} else if(useImageSize!='medium_large') {
-				useImageSize = 'medium_large';
-				imageSrcWillChange = true;
+			if(realViewportWidth >=1600 && max_size >= 1600 && 'huge' in items[0]) {
+				neededSize = 'huge';
+			} else if(realViewportWidth >= 1024 && max_size >= 1024 && 'xlarge' in items[0]) {
+				neededSize = 'xlarge';
+			} else if(realViewportWidth >= 800 && max_size >= 800 && 'large' in items[0]) {
+				neededSize = 'large';
+			} else {
+				neededSize = 'medium_large';
 			}
 
 			// Invalidate items only when source is changed and when it's not the first update
-			if(imageSrcWillChange && !firstResize) {
-				// invalidateCurrItems sets a flag on slides that are in DOM,
-				// which will force update of content (image) on window.resize.
-				gallery.invalidateCurrItems();
+			if (useImageSize != neededSize) {
+				useImageSize = neededSize;
+				if (!firstResize) {
+					// invalidateCurrItems sets a flag on slides that are in DOM,
+					// which will force update of content (image) on window.resize.
+					gallery.invalidateCurrItems();
+				}
 			}
 
-			if(firstResize) {
-				firstResize = false;
-			}
-
-			imageSrcWillChange = false;
-
+			firstResize = false;
 		});
-
 
 		// gettingData event fires each time PhotoSwipe retrieves image source & size
 
