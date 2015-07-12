@@ -10,6 +10,7 @@ var initPhotoSwipeFromDOM = function(options) {
 				item['_common'] = {
 					"msrc": $(this).attr('data-src') || $(this).attr('src')
 				};
+				item.pid = base.split('/').slice(-3).join("-").slice(0,-1).toLowerCase();
 
 				jQuery.each($(this).attr('data-presets').split(" "), function(i,val) {
 					preset_info = val.split(",");
@@ -57,14 +58,10 @@ var initPhotoSwipeFromDOM = function(options) {
 			params.gid = parseInt(params.gid, 10);
 		}
 
-		if(!params.hasOwnProperty('pid')) {
-			return params;
-		}
-		params.pid = parseInt(params.pid, 10);
 		return params;
 	};
 
-	var openPhotoSwipe = function(index, disableAnimation) {
+	var openPhotoSwipe = function(index, disableAnimation, fromURL) {
 		var pswpElement = $('.pswp')[0],
 			gallery,
 			options,
@@ -90,11 +87,10 @@ var initPhotoSwipeFromDOM = function(options) {
 
 		// define options (if needed)
 		options = {
-			index: parseInt(index),
 			preload: [5,10],
 
 			getThumbBoundsFn: function(index) {
-				el=$("[data-pswp-gid='"+index+"']").children("img[data-presets]");
+				el=$("[data-pswp-uid='"+index+"']").children("img[data-presets]");
 				return {x:el.offset().left, y:el.offset().top, w:el.width()};
 			},
 
@@ -107,12 +103,33 @@ var initPhotoSwipeFromDOM = function(options) {
 				} else {
 					return 1;
 				}
-			}
+			},
+			 galleryPIDs: true
 		};
+
+		if (fromURL) {
+			if (options.galleryPIDs) {
+				for (var j = 0;j < items.length; j++) {
+					if(items[j].pid == index) {
+						options.index = j;
+						break;
+					}
+				}
+			} else {
+				options.index = parseInt(index,10) -1;
+			}
+		} else {
+			options.index = parseInt(index,10);
+		}
+
+		if (isNaN(options.index)) {
+			return;
+		}
 
 		if(disableAnimation) {
 			options.showAnimationDuration = 0;
 		}
+
 		// Pass data to PhotoSwipe and initialize it
 		gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
 
@@ -161,13 +178,6 @@ var initPhotoSwipeFromDOM = function(options) {
 
 		});
 
-// This needs to be improved. Having close animation and scroll at same time results in something weird and unnatural.
-//
-//		  gallery.listen('close', function() {
-//            index = gallery.getCurrentIndex();
-//            el=$("[data-pswp-gid='"+index+"']").children("img");
-//            $('html, body').animate({scrollTop:el.offset().top-$(window).height()/2+el.height()}, 500);
-//        });
 
 		// gettingData event fires each time PhotoSwipe retrieves image source & size
 
@@ -243,7 +253,7 @@ var initPhotoSwipeFromDOM = function(options) {
 
 		if (!pswp_open) {
 			$('.pswp')[0].className = "pswp";
-			$("a[data-pswp-gid]").removeAttr("data-pswp-gid");
+			$("a[data-pswp-uid]").removeAttr("data-pswp-upid");
 		}
 
 		var i = 0;
@@ -276,11 +286,11 @@ var initPhotoSwipeFromDOM = function(options) {
 		                if ($(this).children("img").length > 0) {
 		                    if (!$(this).parent().hasClass('type_video')) {
 		                        $(this).click(function(e) {
-		                            openPhotoSwipe(parseInt($(this).first().attr('data-pswp-gid')));
+		                            openPhotoSwipe($(this).first().attr('data-pswp-uid'));
 		                            return false;
 		                        });
 		                    }
-		                    $(this).attr('data-pswp-gid', i);
+		                    $(this).attr('data-pswp-uid', i);
 		                    i++;
 		                }
 			});
@@ -329,8 +339,8 @@ var initPhotoSwipeFromDOM = function(options) {
 
 	// Parse URL and open gallery if it contains #&pid=3&gid=1
 	var hashData = photoswipeParseHash();
-	if(hashData.pid > 0) {
-		openPhotoSwipe( hashData.pid - 1 , true );
+	if(hashData.pid && hashData.gid) {
+		openPhotoSwipe( hashData.pid, true, true );
 	}
 
 };
