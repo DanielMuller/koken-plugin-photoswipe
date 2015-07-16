@@ -101,7 +101,8 @@ class MesphotosPhotoswipe extends KokenPlugin {
 			'madison 2' => 'a.k-link-lightbox',
 			'regale' => 'div#grid:not(.albums) a.img-hover',
 			'regale 2' => 'a.k-link-lightbox',
-			'repertoire' => 'div.img-wrap a'
+			'repertoire' => 'div.img-wrap a',
+			'oxygen' => 'a.k-link-lightbox'
 		);
 		$myTheme = strtolower(Koken::$site['theme']['name']);
 		return $triggerEls[$myTheme];
