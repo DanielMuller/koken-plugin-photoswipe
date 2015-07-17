@@ -165,6 +165,9 @@ var initPhotoSwipeFromDOM = function(options) {
 				if (!firstResize) {
 					// invalidateCurrItems sets a flag on slides that are in DOM,
 					// which will force update of content (image) on window.resize.
+					for (var i = 0 ; i<items.length; i++) {
+						items[i].loaded=false;
+					}
 					gallery.invalidateCurrItems();
 				}
 			}
