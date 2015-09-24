@@ -197,6 +197,7 @@ var initPhotoSwipeFromDOM = function(options) {
 		*/
 
 		var scroll_move = null;
+		var bind_move = false;
 		if (typeof $K == 'object') {
 			if (typeof $K.keyboard == 'object') {
 				if (typeof $K.keyboard.scroll == 'object') {
@@ -205,9 +206,17 @@ var initPhotoSwipeFromDOM = function(options) {
 						$K.keyboard.scroll.move = function(){return true;};
 					}
 				}
+                $("[data-bind-to-key]").each(function() {
+					bind_move = true;
+                    var t = $(this), e = t.attr("data-bind-to-key");
+                    key.unbind(e);
+                });
 			}
 		}
 		gallery.listen('destroy',function(){
+			if (bind_move === true){
+				$K.keyboard.bind();
+			}
 			if (scroll_move) {
 				$K.keyboard.scroll.move = scroll_move;
 				scroll_move = null;
