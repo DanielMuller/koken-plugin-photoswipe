@@ -286,18 +286,34 @@ var initPhotoSwipeFromDOM = function(options) {
 		if (!pswp_open) {
 			galleryElements.each(function(){
 				if ($(this).children("img").length > 0) {
-					if (!$(this).parent().hasClass('type_video')) {
-						$(this).click(function(e) {
-							openPhotoSwipe($(this).first().attr('data-pswp-uid'));
-							return false;
-						});
-					}
-					$(this).attr('data-pswp-uid', i);
+					set_link($(this),i);
 					i++;
 				}
 			});
+			galleryElements.each(function(){
+				if ($(this).attr("title")=="View in lightbox") {
+					lb_url = $(this).attr("href");
+					if (typeof lb_url != "undefined" && lb_url.length > 0 ) {
+						lb_element = $(this);
+						$('a[href="'+lb_url+'"]').each(function(){
+							if ($(this).attr('data-pswp-uid') && $(this).children("img").length > 0 ) {
+								set_link(lb_element,$(this).attr('data-pswp-uid'));
+							}
+						});
+					}
+				}
+			});
 		}
-	}
+	};
+	var set_link = function(el,i) {
+		if (!el.parent().hasClass('type_video')) {
+			el.click(function(e) {
+				openPhotoSwipe(el.first().attr('data-pswp-uid'));
+				return false;
+			});
+		}
+		el.attr('data-pswp-uid', i);
+	};
 	var koken_options = options;
 	var pswp_open = false;
 	var pswp_open_orientation;
@@ -308,7 +324,6 @@ var initPhotoSwipeFromDOM = function(options) {
 	var galleryElements = $(koken_options.triggerEl);
 
 	var last_resize = 0;
-
 	$(window).on('k-resize',function(){
 		if ((Date.now()-last_resize>1000)) {
 			last_resize = Date.now();
