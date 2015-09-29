@@ -4,22 +4,22 @@ var initPhotoSwipeFromDOM = function(options) {
 		var items = []
 		el.children("img").each(function(){
 			if (typeof($(this).attr('data-base')) != "undefined" && typeof($(this).attr('data-extension')) != "undefined" && typeof($(this).attr('data-presets')) != "undefined") {
-				item = {};
-				base = $(this).attr('data-base');
-				ext = $(this).attr('data-extension');
+				var item = {};
+				var base = $(this).attr('data-base');
+				var ext = $(this).attr('data-extension');
 				item['_common'] = {
 					"msrc": $(this).attr('data-src') || $(this).attr('src')
 				};
 				item.pid = base.split('/').slice(-3).join("-").slice(0,-1).toLowerCase();
 
 				jQuery.each($(this).attr('data-presets').split(" "), function(i,val) {
-					preset_info = val.split(",");
-					name = preset_info[0];
-					size_factor = isHighDensity() ? 2 : 1;
-					retina = isHighDensity() ? '.2x.' : '.';
-					w = parseInt(preset_info[1]);
-					h = parseInt(preset_info[2]);
-					src = base+name+retina+ext;
+					var preset_info = val.split(",");
+					var name = preset_info[0];
+					var size_factor = isHighDensity() ? 2 : 1;
+					var retina = isHighDensity() ? '.2x.' : '.';
+					var w = parseInt(preset_info[1]);
+					var h = parseInt(preset_info[2]);
+					var src = base+name+retina+ext;
 
 					item[name] = {
 						"src": src,
