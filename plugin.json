@@ -1,6 +1,6 @@
 {
 	"name": "PhotoSwipe",
-	"version": "1.6.2",
+	"version": "1.6.3",
 	"description": "Replaces default Lightbox with Photoswipe (http://photoswipe.com)",
 	"author": {
 		"name": "Daniel Muller",
