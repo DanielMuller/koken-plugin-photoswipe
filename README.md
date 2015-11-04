@@ -57,6 +57,55 @@ An easy way to install it under Debian/Ubuntu:
 And uglify the file by running:
 `uglifyjs src/pswp.js > pswp/pswp.min.js`
 
+Title/Caption
+-------------
+
+You can enable/disable the usage of the image title/caption in the lightbox in
+the plugin setup.
+
+The image title will be used from the `alt` image attribute.
+
+If you want to add the caption or additional information to the image title
+you've to add a html element to the template.
+
+Simple caption:
+
+    <koken:link lightbox="true">
+      <koken:img />
+      <div class="item-caption" style="display: none">{{ content.caption }}</div>
+    </koken:link>
+
+Complex caption using the timestamp and exif data:
+
+    <koken:link lightbox="true">
+      <koken:img />
+      <div class="item-caption" style="display: none">
+        <koken:time />
+        |
+        <koken:exif>
+          <koken:not empty="exif.make">
+            {{ exif.make }},
+          </koken:not>
+           <koken:not empty="exif.model">
+            {{ exif.model }},
+          </koken:not>
+          <koken:not empty="exif.exposure">
+             {{ exif.exposure }},
+          </koken:not>
+          <koken:not empty="exif.aperture">
+            {{ exif.aperture }},
+          </koken:not>
+          <koken:not empty="exif.focal_length">
+            {{ exif.focal_length }},
+          </koken:not>
+          <koken:not empty="exif.iso_speed_ratings">
+            {{ exif.iso_speed_ratings }}
+          </koken:not>
+        </koken:exif>
+      </div>
+    </koken:link>
+
+
 Todo
 ----
 - Ajax/PHP calls for image details
