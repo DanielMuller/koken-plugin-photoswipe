@@ -10,6 +10,8 @@ var initPhotoSwipeFromDOM = function(options) {
 				item['_common'] = {
 					"msrc": $(this).attr('data-src') || $(this).attr('src')
 				};
+				item['title'] = $(this).attr('data-alt') || $(this).attr('alt');
+				item['caption'] = $(this).nextAll('.item-caption:first').html();
 				item.pid = base.split('/').slice(-3).join("-").slice(0,-1).toLowerCase();
 
 				jQuery.each($(this).attr('data-presets').split(" "), function(i,val) {
@@ -104,7 +106,15 @@ var initPhotoSwipeFromDOM = function(options) {
 					return 1;
 				}
 			},
-			 galleryPIDs: true
+			galleryPIDs: true,
+			addCaptionHTMLFn: function(item, captionEl, isFake) {
+				if(!koken_options.showTitle || !item.title) {
+					captionEl.children[0].innerHTML = '';
+					return false;
+				}
+				captionEl.children[0].innerHTML = item.title + (item.caption ? '<br/><small>' + item.caption + '</small>' : '');
+				return true;
+			}
 		};
 
 		if (fromURL) {

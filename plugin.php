@@ -47,6 +47,7 @@ class MesphotosPhotoswipe extends KokenPlugin {
 		$pswp[] = '<script src="'.$this->get_url($ui_js).'"></script>';
 		$pswp[] = '<script src="'.$this->get_url($pswp_js).'"></script>';
 		$koken_options = Array(
+			'showTitle' => $this->data->show_title ? 'true' : 'false',
 			'sharing' => $sharing,
 			'triggerEl' => $this->get_triggerEl(),
 			'usingPillar' => $this->usingPillar(),
