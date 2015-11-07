@@ -42,6 +42,11 @@
 			"type": "boolean",
 			"value": false
 		},
+		"show_title": {
+			"label": "Display caption",
+			"type": "boolean",
+			"value": false
+		},
 		"trigger_el": {
 			"label": "Trigger Element",
 			"info": "jQuery Element that triggers Photoswipe. Needs to be the parent of the img tag. Leave empty to use the default based on current theme. Example for Axis: a.k-link-lightbox",
