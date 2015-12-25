@@ -93,6 +93,9 @@ var initPhotoSwipeFromDOM = function(options) {
 
 			getThumbBoundsFn: function(index) {
 				el=$("[data-pswp-uid='"+index+"']").children("img[data-presets]");
+				if (typeof(el.offset())=="undefined") {
+					return {x:0,y:0,w:200};
+				}
 				return {x:el.offset().left, y:el.offset().top, w:el.width()};
 			},
 
