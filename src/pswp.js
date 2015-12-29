@@ -28,6 +28,13 @@ var initPhotoSwipeFromDOM = function(options) {
 						"w": size_factor*w,
 						"h": size_factor*h
 					};
+					if (name=='huge') {
+						item['huge.2x'] = {
+							"src": base+name+'.2x.'+ext,
+							"w": 2*w,
+							"h": 2*h
+						};
+					}
 				});
 				items.push(item);
 			}
