@@ -171,6 +171,9 @@ var initPhotoSwipeFromDOM = function(options) {
 			// Find out if current images need to be changed
 			if(realViewportWidth >=1600 && max_size >= 1600 && 'huge' in items[0]) {
 				neededSize = 'huge';
+				if(realViewportWidth >=2048 && max_size >= 2048 && koken_options.hidpi===true && size_factor==1) {
+					neededSize = 'huge.2x';
+				}
 			} else if(realViewportWidth >= 1024 && max_size >= 1024 && 'xlarge' in items[0]) {
 				neededSize = 'xlarge';
 			} else if(realViewportWidth >= 800 && max_size >= 800 && 'large' in items[0]) {
