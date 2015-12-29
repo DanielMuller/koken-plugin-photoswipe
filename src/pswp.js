@@ -1,7 +1,9 @@
 var initPhotoSwipeFromDOM = function(options) {
 
 	var parseThumbnailElements = function(el) {
+
 		var items = []
+
 		el.children("img").each(function(){
 			if (typeof($(this).attr('data-base')) != "undefined" && typeof($(this).attr('data-extension')) != "undefined" && typeof($(this).attr('data-presets')) != "undefined") {
 				var item = {};
@@ -36,7 +38,16 @@ var initPhotoSwipeFromDOM = function(options) {
 						};
 					}
 				});
-				items.push(item);
+				itemExists = false;
+				$.each(items,function(index, value){
+					if (value.pid == item.pid) {
+						itemExists = true;
+						return false;
+					}
+				});
+				if (!itemExists) {
+					items.push(item);
+				}
 			}
 		});
 		return items;
