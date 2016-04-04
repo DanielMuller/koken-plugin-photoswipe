@@ -118,6 +118,14 @@ var initPhotoSwipeFromDOM = function(options) {
 			},
 
 			shareButtons: shareButtons,
+			getImageURLForShare: function( shareButtonData ) {
+				if (shareButtonData.download && koken_options.download_full) {
+					download_version = 'huge';
+					if (koken_options.hidpi===true) {download_version = 'huge.2x'}
+					return gallery.currItem[download_version].src;
+				}
+				return gallery.currItem.src || '';
+			},
 			shareEl: (shareButtons.length>0),
 			// prevent zooming to 200x on retina devices (eg retina macbook pro, ipads)
 			getDoubleTapZoom: function(){

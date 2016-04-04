@@ -52,6 +52,12 @@
 			"type": "boolean",
 			"value": false
 		},
+		"download_full": {
+			"label": "Download biggest size",
+			"info": "Download current size or biggest size",
+			"type": "boolean",
+			"value": false
+		},
 		"trigger_el": {
 			"label": "Trigger Element",
 			"info": "jQuery Element that triggers Photoswipe. Needs to be the parent of the img tag. Leave empty to use the default based on current theme. Example for Axis: a.k-link-lightbox",

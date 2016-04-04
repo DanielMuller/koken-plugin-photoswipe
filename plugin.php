@@ -52,7 +52,8 @@ class MesphotosPhotoswipe extends KokenPlugin {
 			'triggerEl' => $this->get_triggerEl(),
 			'usingPillar' => $this->usingPillar(),
 			'hidpi' => Koken::$site['hidpi'],
-			'max_size' => intval($this->data->max_size)
+			'max_size' => intval($this->data->max_size),
+			'download_full' => $this->data->download_full ? true : false
 		);
 		$pswp[] = '<script language="javascript">$(function(){initPhotoSwipeFromDOM('.json_encode($koken_options).')});</script>';
 
