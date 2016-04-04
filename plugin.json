@@ -42,6 +42,11 @@
 			"type": "boolean",
 			"value": false
 		},
+		"behaviors": {
+			"label": "Behaviors",
+			"info": "Choose some behaviors",
+			"type": "placeholder"
+		},
 		"show_title": {
 			"label": "Display caption",
 			"type": "boolean",
