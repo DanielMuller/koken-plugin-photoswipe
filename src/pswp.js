@@ -98,7 +98,7 @@ var initPhotoSwipeFromDOM = function(options) {
 			pinterest:{id:'pinterest', label:'Pin it', url:'http://www.pinterest.com/pin/create/button/?url={{url}}&media={{image_url}}&description={{text}}'},
 			gplus:{id:'gplus', label:'Google+', url:'https://plus.google.com/share?url={{url}}'},
 			tumblr:{id:'tumblr', label:'Tumblr', url:'http://www.tumblr.com/share/photo?caption={{text}}&click_thru={{url}}&source={{image_url}}'},
-			download:{id:'download', label:'Download Image', url:'',download:true}
+			download:{id:'download', label:'Download Image', url:'{{raw_image_url}}',download:true}
 		};
 		var shareButtons = Array();
 		$.each(koken_options.sharing, function(index,value) {
