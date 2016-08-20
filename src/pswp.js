@@ -220,7 +220,7 @@ var initPhotoSwipeFromDOM = function(options) {
 
 			// Set image source & size based on real viewport width
 			item.src = item[useImageSize].src;
-			item.msrc = item['_common'].msrc;
+			item.msrc = item['_common'].msrc.replace(".crop.",".");
 			item.w = item[useImageSize].w;
 			item.h = item[useImageSize].h;
 
