@@ -50,7 +50,9 @@ class MesphotosPhotoswipe extends KokenPlugin {
 			'showTitle' => $this->data->show_title ? true : false,
 			'sharing' => $sharing,
 			'triggerEl' => $this->get_triggerEl(),
+			'view_in_lightbox' => $this->get_view_in_lightbox(),
 			'usingPillar' => $this->usingPillar(),
+			'usingPjaxWithoutPillar' => $this->data->using_pjax_without_pillar ? true : false,
 			'hidpi' => Koken::$site['hidpi'],
 			'max_size' => intval($this->data->max_size),
 			'download_full' => $this->data->download_full ? true : false
@@ -138,5 +140,12 @@ class MesphotosPhotoswipe extends KokenPlugin {
 		$myTheme = strtolower(Koken::$site['theme']['name']);
 		$pillarThemes = Array('madison 2', 'regale 2', 'axis 2');
 		return (in_array($myTheme,$pillarThemes)) ? true : false;
+	}
+	
+	function get_view_in_lightbox() {
+		if (trim($this->data->view_in_lightbox)!="") {
+			return trim($this->data->view_in_lightbox);
+		}
+		else return "View in lightbox";
 	}
 }

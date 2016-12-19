@@ -1,6 +1,6 @@
 {
 	"name": "PhotoSwipe",
-	"version": "1.7.4",
+	"version": "1.7.5",
 	"description": "Replaces default Lightbox with Photoswipe (http://photoswipe.com)",
 	"author": {
 		"name": "Daniel Muller",
@@ -42,6 +42,16 @@
 			"type": "boolean",
 			"value": false
 		},
+		"localization": {
+			"label": "Localization settings",
+			"info": "some localization strings",
+			"type": "placeholder"
+		},
+		"view_in_lightbox": {
+			"label": "View in lightbox string",
+			"info": "View in lightbox string",
+			"type": "string"
+		},
 		"behaviors": {
 			"label": "Behaviors",
 			"info": "Choose some behaviors",
@@ -55,6 +65,12 @@
 		"download_full": {
 			"label": "Download biggest size",
 			"info": "Download current size or biggest size",
+			"type": "boolean",
+			"value": false
+		},
+		"using_pjax_without_pillar": {
+			"label": "Using pjax without pillar",
+			"info": "Using pjax without pillar needs to disable the automatic pillar hacks (for example, list layout on Madison2 requires this flag enabled)",
 			"type": "boolean",
 			"value": false
 		},
