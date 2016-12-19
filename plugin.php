@@ -52,8 +52,7 @@ class MesphotosPhotoswipe extends KokenPlugin {
 			'triggerEl' => $this->get_triggerEl(),
 			'view_in_lightbox' => $this->get_view_in_lightbox(),
 			'usingPillar' => $this->usingPillar(),
-			'disablePillarHacks' => $this->data->disable_pillar_hacks ? true : false,
-			'usingPjax' => $this->data->using_Pjax ? true : false,
+			'usingPjaxWithoutPillar' => $this->data->using_pjax_without_pillar ? true : false,
 			'hidpi' => Koken::$site['hidpi'],
 			'max_size' => intval($this->data->max_size),
 			'download_full' => $this->data->download_full ? true : false
