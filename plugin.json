@@ -68,15 +68,9 @@
 			"type": "boolean",
 			"value": false
 		},
-		"using_Pjax": {
-			"label": "Using pjax",
-			"info": "Using pjax",
-			"type": "boolean",
-			"value": false
-		},
-		"disable_pillar_hacks": {
-			"label": "Disable automatic pillar hacks",
-			"info": "Disable automatic pillar hacks (ex list layout with Madison2 require pjax and pillar hacks disable)",
+		"using_pjax_without_pillar": {
+			"label": "Using pjax without pillar",
+			"info": "Using pjax without pillar needs to disable the automatic pillar hacks (for example, list layout on Madison2 requires this flag enabled)",
 			"type": "boolean",
 			"value": false
 		},
