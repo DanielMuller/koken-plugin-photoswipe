@@ -9,3 +9,20 @@ a.pswp__share--tumblr:hover {
   background: #2c4762;
   color: #FFF;
 }
+.icon-heart:before {
+    content: '\e805';
+    font-family: kicon;
+    font-style: normal;
+    font-weight: 400;
+}
+.icon-large:before {
+    vertical-align:-10%;
+    font-size:1.5em;
+}
+.pswp__button--rating, .pswp__button--rating:hover {
+    background:none;
+    color:#fff;
+}
+.koken-rating::after {
+    content: attr(data-count);
+}

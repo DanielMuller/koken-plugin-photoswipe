@@ -13,8 +13,19 @@ var initPhotoSwipeFromDOM = function(options) {
 					"msrc": $(this).attr('data-src') || $(this).attr('src')
 				};
 				item['title'] = $(this).attr('data-alt') || $(this).attr('alt');
+
 				item['caption'] = $(this).nextAll('.item-caption:first').html();
 				item.pid = base.split('/').slice(-3).join("-").slice(0,-1).toLowerCase();
+				var rating_el = $(this).parent().parent().children('figcaption').children('p').children('span');
+				var rating = null;
+				if (rating_el.length > 0) {
+					rating = {
+						cid: rating_el.attr('data-cid'),
+						average: rating_el.attr('data-average'),
+						count: rating_el.attr('data-count')
+					}
+				}
+				item['rating'] = rating;
 
 				jQuery.each($(this).attr('data-presets').split(" "), function(i,val) {
 					var preset_info = val.split(",");
@@ -169,6 +180,11 @@ var initPhotoSwipeFromDOM = function(options) {
 			options.showAnimationDuration = 0;
 		}
 
+		// If Items[0] has rating data, we enable the rating display in UI
+		if (items[0].rating) {
+			$('button.pswp__button--rating').removeClass('pswp__element--disabled');
+		}
+
 		// Pass data to PhotoSwipe and initialize it
 		gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
 
@@ -223,6 +239,9 @@ var initPhotoSwipeFromDOM = function(options) {
 			item.msrc = item['_common'].msrc.replace(".crop.",".");
 			item.w = item[useImageSize].w;
 			item.h = item[useImageSize].h;
+			if (item.rating) {
+				$('button.pswp__button--rating span').attr('data-cid', item.rating.cid).attr('data-average', item.rating.average).attr('data-count', item.rating.count);
+			}
 
 			// It doesn't really matter what will you do here,
 			// as long as item.src, item.w and item.h have valid values.
