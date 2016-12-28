@@ -66,6 +66,9 @@
   .pswp--svg .pswp__button--arrow--left,
   .pswp--svg .pswp__button--arrow--right {
     background: none; } }
+  .pswp--svg .pswp__button--rating{
+    background: none;}
+
 
 .pswp__button--close {
   background-position: 0 -44px; }
