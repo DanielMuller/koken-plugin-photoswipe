@@ -3,7 +3,6 @@ var initPhotoSwipeFromDOM = function(options) {
 	var parseThumbnailElements = function(el) {
 
 		var items = []
-
 		el.children("img").each(function(){
 			if (typeof($(this).attr('data-base')) != "undefined" && typeof($(this).attr('data-extension')) != "undefined" && typeof($(this).attr('data-presets')) != "undefined") {
 				var item = {};
@@ -148,6 +147,10 @@ var initPhotoSwipeFromDOM = function(options) {
 			},
 			galleryPIDs: true,
 			addCaptionHTMLFn: function(item, captionEl, isFake) {
+				if (item['rating'] && !isFake) {
+					$('button.pswp__button--rating span').attr('data-cid', item['rating'].cid).attr('data-average', item['rating'].average).attr('data-count', item['rating'].count);
+				}
+
 				if(!koken_options.showTitle || !item.title) {
 					captionEl.children[0].innerHTML = '';
 					return false;
@@ -239,9 +242,6 @@ var initPhotoSwipeFromDOM = function(options) {
 			item.msrc = item['_common'].msrc.replace(".crop.",".");
 			item.w = item[useImageSize].w;
 			item.h = item[useImageSize].h;
-			if (item.rating) {
-				$('button.pswp__button--rating span').attr('data-cid', item.rating.cid).attr('data-average', item.rating.average).attr('data-count', item.rating.count);
-			}
 
 			// It doesn't really matter what will you do here,
 			// as long as item.src, item.w and item.h have valid values.
