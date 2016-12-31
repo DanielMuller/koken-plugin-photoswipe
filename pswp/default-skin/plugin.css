@@ -9,9 +9,9 @@ a.pswp__share--tumblr:hover {
   background: #2c4762;
   color: #FFF;
 }
-.icon-heart:before {
+.kicon-heart:before {
     content: '\e805';
-    font-family: kicon;
+    font-family: 'kicons';
     font-style: normal;
     font-weight: 400;
 }
