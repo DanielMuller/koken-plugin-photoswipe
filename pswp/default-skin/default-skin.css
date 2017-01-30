@@ -37,6 +37,7 @@
           box-shadow: none; }
   .pswp__button:focus,
   .pswp__button:hover {
+    background-color: transparent;
     opacity: 1; }
   .pswp__button:active {
     outline: none;
