@@ -15,7 +15,7 @@ var initPhotoSwipeFromDOM = function(options) {
 
 				item['caption'] = $(this).nextAll('.item-caption:first').html();
 				item.pid = base.split('/').slice(-3).join("-").slice(0,-1).toLowerCase();
-				var rating_el = $(this).parent().parent().children('figcaption').children('p').children('span.koken-rating');
+				var rating_el = $(this).parent().parent().children('figcaption').find('span.koken-rating');
 				var rating = null;
 				if (rating_el.length > 0) {
 					rating = {
